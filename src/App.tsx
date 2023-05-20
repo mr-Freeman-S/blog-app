@@ -1,11 +1,12 @@
 import React from 'react';
 import './App.css';
+import {HeaderMenu} from './pagesView/HeaderMenu';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-      </header>
+      <HeaderMenu/>
     </div>
   );
 }

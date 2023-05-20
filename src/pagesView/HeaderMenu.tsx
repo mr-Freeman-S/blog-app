@@ -5,13 +5,13 @@ import profileImg from './../assets/img/profileImg.png'
 export const HeaderMenu = () => {
   return (
     <header>
-      <Navbar bg="light" expand={false}>
+      <Navbar bg='light' expand={false}>
         <Container fluid>
           <Navbar.Toggle/>
           <Navbar.Collapse>
             <Nav>
-              <Nav.Link href='#'>Posts</Nav.Link>
-              <Nav.Link href='#'>About Me</Nav.Link>
+              <Nav.Link href='/'>Posts</Nav.Link>
+              <Nav.Link href='aboutMe'>About Me</Nav.Link>
             </Nav>
             <Nav>
               <Image src={profileImg} roundedCircle width={100} height={100}></Image>

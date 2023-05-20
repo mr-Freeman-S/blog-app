@@ -14,7 +14,7 @@ export const HeaderMenu = () => {
               <Nav.Link href='aboutMe'>About Me</Nav.Link>
             </Nav>
             <Nav>
-              <Image src={profileImg} roundedCircle width={100} height={100}></Image>
+              <Image  src={profileImg} roundedCircle width={100} height={100}></Image>
               <h3>Slava</h3>
               <Nav.Link href='mailto:mr.baranok.slava@gmail.com'>mr.baranok.slava@gmail.com</Nav.Link>
             </Nav>

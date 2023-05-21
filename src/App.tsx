@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import {AboutMePage} from './pagesView/aboutMePage/AboutMePage';
 import {UserInfoPage} from './pagesView/userInfoPage/UserInfoPage';

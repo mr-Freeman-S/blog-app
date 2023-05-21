@@ -6,7 +6,7 @@ import {CommentCard} from './CommentCard';
 
 export const PostCard = () => {
   return (
-    <Card className='flex-row align-items-center m-4 p-2'>
+    <Card border='primary' className='flex-row align-items-center m-4 p-2'>
       <Nav.Link href={`/userInfo/1`}>
         <Image roundedCircle width={50} height={50} src={profileImg}/>
       </Nav.Link>
@@ -19,6 +19,8 @@ export const PostCard = () => {
           <Container fluid>
             <Navbar.Toggle>Comments</Navbar.Toggle>
             <Navbar.Collapse>
+              <CommentCard/>
+              <CommentCard/>
               <CommentCard/>
             </Navbar.Collapse>
           </Container>

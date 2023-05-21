@@ -1,16 +1,20 @@
 import React from 'react';
 import './App.css';
-import {HeaderMenu} from './pagesView/HeaderMenu';
 import {PostsPage} from './pagesView/postsPage/PostsPage';
 import {AboutMePage} from './pagesView/aboutMePage/AboutMePage';
 import {UserInfoPage} from './pagesView/userInfoPage/UserInfoPage';
-import {Route, Routes} from 'react-router-dom';
+import {Route, Routes, useLocation} from 'react-router-dom';
+import {HeaderMenu} from './pagesView/HeaderMenu';
 
 
 function App() {
+  const location = useLocation();
+
+  const isShowHeaderMenu = location.pathname === '/' || location.pathname === '/aboutMe';
+
   return (
     <div className='App'>
-      <HeaderMenu/>
+      {isShowHeaderMenu && <HeaderMenu/>}
       <Routes>
         <Route path='/' element={<PostsPage/>}/>
         <Route path='/aboutMe' element={<AboutMePage/>}/>

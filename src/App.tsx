@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
-import {PostsPage} from './pagesView/postsPage/PostsPage';
 import {AboutMePage} from './pagesView/aboutMePage/AboutMePage';
 import {UserInfoPage} from './pagesView/userInfoPage/UserInfoPage';
 import {Route, Routes, useLocation} from 'react-router-dom';
 import {HeaderMenu} from './pagesView/HeaderMenu';
+import {PostsPage} from './pagesView/postsPage/PostsPage';
 
 
 function App() {

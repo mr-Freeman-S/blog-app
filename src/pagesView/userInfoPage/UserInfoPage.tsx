@@ -1,12 +1,24 @@
 import React from 'react';
-import {Nav} from 'react-bootstrap';
+import {Button, Card} from 'react-bootstrap';
 import {useNavigate} from "react-router-dom";
+import {Posts} from '../postsPage/Posts';
 
 export const UserInfoPage = () => {
   const navigation = useNavigate();
   return (
     <div>
-        <Nav.Link onClick={() => navigation(-1)}>Back</Nav.Link>
+      <Button onClick={() => navigation(-1)} variant="primary" size="sm">
+        Go Back
+      </Button>
+      <Card>
+        <Card.Header>
+          PASHA
+        </Card.Header>
+        <Card.Body>
+          <Card.Text>Abot me</Card.Text>
+        </Card.Body>
+      </Card>
+      <Posts/>
     </div>
   );
 };

@@ -5,6 +5,7 @@ import {Posts} from '../postsPage/Posts';
 
 export const UserInfoPage = () => {
   const navigation = useNavigate();
+
   return (
     <div>
       <Button onClick={() => navigation(-1)} variant="primary" size="sm">
@@ -18,7 +19,7 @@ export const UserInfoPage = () => {
           <Card.Text>About me</Card.Text>
         </Card.Body>
       </Card>
-      <Posts/>
+      <Posts posts={[]}/>
     </div>
   );
 };

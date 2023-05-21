@@ -15,7 +15,7 @@ export const UserInfoPage = () => {
           PASHA
         </Card.Header>
         <Card.Body>
-          <Card.Text>Abot me</Card.Text>
+          <Card.Text>About me</Card.Text>
         </Card.Body>
       </Card>
       <Posts/>

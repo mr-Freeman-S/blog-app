@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import {AboutMePage} from './pagesView/aboutMePage/AboutMePage';
 import {UserInfoPage} from './pagesView/userInfoPage/UserInfoPage';
@@ -11,6 +11,7 @@ function App() {
   const location = useLocation();
 
   const isShowHeaderMenu = location.pathname === '/' || location.pathname === '/aboutMe';
+
 
   return (
     <div className='App'>

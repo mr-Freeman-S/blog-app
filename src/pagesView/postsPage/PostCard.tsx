@@ -1,8 +1,8 @@
 import React from 'react';
-import {Card, Container, Image, Nav, Navbar} from 'react-bootstrap';
+import {Card, Image, Nav} from 'react-bootstrap';
 import profileImg from './../../assets/img/profileImg.png'
-import {CommentCard} from './CommentCard';
 import {PostType} from '../../types';
+import {CommentsGroup} from './CommentsGroup';
 
 type PostTypeProps = {
   post: PostType
@@ -17,16 +17,7 @@ export const PostCard = ({post}: PostTypeProps) => {
       <Card.Body>
         <Card.Title>{post.title}</Card.Title>
         <Card.Text>{post.body}</Card.Text>
-        <Navbar expand={false}>
-          <Container fluid>
-            <Navbar.Toggle>Comments</Navbar.Toggle>
-            <Navbar.Collapse>
-              <CommentCard/>
-              <CommentCard/>
-              <CommentCard/>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
+        <CommentsGroup postId={post.id}/>
       </Card.Body>
     </Card>
   );

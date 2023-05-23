@@ -3,6 +3,7 @@ export type PostType = {
   title:string
   body: string
   userId:number
+  isLoading: boolean
 }
 
 export type CommentType = {

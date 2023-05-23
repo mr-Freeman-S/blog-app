@@ -1,16 +1,28 @@
 import {createAction, createSlice} from '@reduxjs/toolkit';
 import {PostType} from '../types';
 
-const initialState = {
-  posts : [] as PostType[]
+type InitialStateType = {
+  posts: PostType[]
+  error: string
+  isLoadingPosts: boolean
+}
+
+const initialState: InitialStateType = {
+  posts: [] as PostType[],
+  error: '',
+  isLoadingPosts: false,
+
 }
 
 const slice = createSlice({
   name: 'posts',
   initialState,
   reducers: {
-    getAllPosts(state, action) {
+    setAllPosts(state, action) {
       state.posts = action.payload;
+    },
+    setIsLoadingComments(state, action) {
+      state.posts[state.posts.findIndex(el => el.id === action.payload.id)] = action.payload.isLoading
     },
   },
 });
@@ -21,4 +33,4 @@ export const getPosts = createAction(GET_POSTS);
 
 export const postsReducer = slice.reducer;
 
-export const {getAllPosts} = slice.actions;
+export const {setAllPosts,setIsLoadingComments} = slice.actions;

@@ -2,9 +2,11 @@ import {combineReducers, configureStore} from '@reduxjs/toolkit'
 import {postsReducer} from './postsReducer';
 import createSagaMiddleware from 'redux-saga'
 import {sagas} from "./sagas";
+import {commentsReducer} from "./commentsReducer";
 
 export const rootReducer = combineReducers({
   posts: postsReducer,
+  comments: commentsReducer
 })
 const sagaMiddleware = createSagaMiddleware()
 

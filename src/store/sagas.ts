@@ -1,8 +1,7 @@
-import {takeEvery,delay} from 'redux-saga/effects'
+import {delay, put, takeEvery} from 'redux-saga/effects'
 import {appAPI} from "../api/api";
-import {GET_POSTS, setAllPosts, setIsLoadingComments} from "./postsReducer";
-import {put} from "redux-saga/effects";
-import {setCommentsPost, GET_COMMENTS_POST} from "./commentsReducer";
+import {GET_POSTS, setAllPosts, setCommentsPostIsLoading} from "./postsReducer";
+import {GET_COMMENTS_POST, setCommentsPost} from "./commentsReducer";
 
 
 export function* getPostsSaga(): any {
@@ -11,33 +10,31 @@ export function* getPostsSaga(): any {
     yield put(setAllPosts(payload))
   } catch (error) {
 
+
   } finally {
-    yield put(setIsLoadingComments(false))
+
   }
 }
 
-export function* getCommentsPostSaga(action: { payload: { postId: number } }): any {
+export function* getCommentsPostSaga(action: {type:string, payload: { postId: number } }): any {
 
-  const { postId } = action.payload;
+  const {postId} = action.payload;
   try {
-    yield put(setIsLoadingComments(true))
-    const payload = yield appAPI.getPostComments(postId).then(response =>response.data)
-    yield put(setCommentsPost(payload))
+    yield put(setCommentsPostIsLoading(postId))
+    const payload = yield appAPI.getPostComments(postId).then(response => response.data)
     yield delay(5000)
-
+    yield put(setCommentsPost(payload))
   } catch (error) {
 
   } finally {
-    yield put(setIsLoadingComments(false))
-
+    yield put(setCommentsPostIsLoading(0))
   }
 }
 
 
-
 export function* sagas() {
-  yield takeEvery(GET_POSTS, getPostsSaga)
-  // @ts-ignore
   yield takeEvery(GET_COMMENTS_POST, getCommentsPostSaga)
+  yield takeEvery(GET_POSTS, getPostsSaga)
+
 }
 

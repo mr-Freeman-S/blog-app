@@ -4,13 +4,13 @@ import {PostType} from '../types';
 type InitialStateType = {
   posts: PostType[]
   error: string
-  isLoadingPosts: boolean
+  commentsPostIsLoading: number
 }
 
 const initialState: InitialStateType = {
   posts: [] as PostType[],
   error: '',
-  isLoadingPosts: false,
+  commentsPostIsLoading: 0
 
 }
 
@@ -21,8 +21,8 @@ const slice = createSlice({
     setAllPosts(state, action) {
       state.posts = action.payload;
     },
-    setIsLoadingComments(state, action) {
-      state.posts[state.posts.findIndex(el => el.id === action.payload.id)] = action.payload.isLoading
+    setCommentsPostIsLoading(state, action) {
+      state.commentsPostIsLoading = action.payload;
     },
   },
 });
@@ -33,4 +33,4 @@ export const getPosts = createAction(GET_POSTS);
 
 export const postsReducer = slice.reducer;
 
-export const {setAllPosts,setIsLoadingComments} = slice.actions;
+export const {setAllPosts, setCommentsPostIsLoading} = slice.actions;

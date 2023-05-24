@@ -5,6 +5,7 @@ import {Posts} from '../postsPage/Posts';
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {getUserInfo} from "../../store/userReducer";
 import {resetCommentsState} from "../../store/commentsReducer";
+import {Error} from "../../commonComponents/Error";
 
 export const UserInfoPage = () => {
   const {id: paramId} = useParams()
@@ -13,6 +14,7 @@ export const UserInfoPage = () => {
   const userInfo = useAppSelector(state => state.user.userInfo)
   const userPosts = useAppSelector(state => state.user.userPosts)
   const isLoadingUser = useAppSelector(state => state.user.isLoadingUser)
+  const error = useAppSelector(state => state.user.error)
 
   useEffect(() => {
     dispatch(getUserInfo(Number(paramId)))
@@ -28,6 +30,7 @@ export const UserInfoPage = () => {
       <Button onClick={goBackHandler} variant="primary" size="sm">
         Go Back
       </Button>
+      {error && <Error message={error}/>}
       {isLoadingUser ? <div><Spinner/>Loading Profile</div> : <Card>
         <Card.Header>
           {userInfo.name}

@@ -5,6 +5,7 @@ import {PostType} from '../../types';
 import {CommentsGroup} from './CommentsGroup';
 import {useAppDispatch, useAppSelector} from "../../store/hooks";
 import {getComments} from "../../store/commentsReducer";
+import {Error} from "../../commonComponents/Error";
 
 type PostTypeProps = {
   post: PostType
@@ -15,6 +16,8 @@ export const PostCard = ({post}: PostTypeProps) => {
   const comments = useAppSelector(state => state.comments.commentsPost)
   const commentsPostIsLoading = useAppSelector(state => state.posts.commentsPostIsLoading)
   const dispatch = useAppDispatch()
+  const error = useAppSelector(state => state.user.error)
+
 
   let filteredComments = comments.filter(el => el.postId === post.id)
 
@@ -24,7 +27,7 @@ export const PostCard = ({post}: PostTypeProps) => {
 
   const handleToggle = async () => {
     if (!isCommentsLoaded) {
-       dispatch(getComments(post.id))
+      dispatch(getComments(post.id))
     } else {
       setIsExpanded(true)
     }
@@ -33,18 +36,21 @@ export const PostCard = ({post}: PostTypeProps) => {
   }
 
   return (
-    <Card border='primary' className='flex-row align-items-center m-4 p-2'>
-      <Nav.Link href={`/userInfo/${post.userId}`}>
-        <Image roundedCircle width={50} height={50} src={profileImg}/>
-      </Nav.Link>
-      <Card.Body>
-        <Card.Title>{post.title}</Card.Title>
-        <Card.Text>{post.body}</Card.Text>
-        <CommentsGroup isLoadingComments={post.id === commentsPostIsLoading} handleToggle={handleToggle}
-                       isExpanded={isExpanded}
-                       comments={filteredComments}/>
-      </Card.Body>
-    </Card>
+    <>
+      {error && <Error message={error}/>}
+      <Card border='primary' className='flex-row align-items-center m-4 p-2'>
+        <Nav.Link href={`/userInfo/${post.userId}`}>
+          <Image roundedCircle width={50} height={50} src={profileImg}/>
+        </Nav.Link>
+        <Card.Body>
+          <Card.Title>{post.title}</Card.Title>
+          <Card.Text>{post.body}</Card.Text>
+          <CommentsGroup isLoadingComments={post.id === commentsPostIsLoading} handleToggle={handleToggle}
+                         isExpanded={isExpanded}
+                         comments={filteredComments}/>
+        </Card.Body>
+      </Card>
+    </>
   );
 };
 

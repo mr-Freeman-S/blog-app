@@ -3,7 +3,7 @@ import './App.css';
 import {AboutMePage} from './pagesView/aboutMePage/AboutMePage';
 import {UserInfoPage} from './pagesView/userInfoPage/UserInfoPage';
 import {Route, Routes, useLocation} from 'react-router-dom';
-import {HeaderMenu} from './pagesView/HeaderMenu';
+import {HeaderMenu} from './commonComponents/HeaderMenu';
 import {PostsPage} from './pagesView/postsPage/PostsPage';
 
 

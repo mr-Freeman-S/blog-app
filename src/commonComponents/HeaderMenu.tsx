@@ -1,6 +1,6 @@
 import React from 'react';
 import {Container, Nav, Navbar, Image} from 'react-bootstrap';
-import myPhoto from './../assets/img/myPhoto.jpg'
+import myPhoto from '../assets/img/myPhoto.jpg'
 
 export const HeaderMenu = () => {
   return (
@@ -18,9 +18,7 @@ export const HeaderMenu = () => {
               <h3>Slava</h3>
               <Nav.Link href='mailto:mr.baranok.slava@gmail.com'>mr.baranok.slava@gmail.com</Nav.Link>
             </Nav>
-
           </Navbar.Collapse>
-
         </Container>
       </Navbar>
     </header>

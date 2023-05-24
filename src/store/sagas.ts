@@ -1,19 +1,20 @@
 import {delay, put, takeEvery} from 'redux-saga/effects'
 import {appAPI} from "../api/api";
-import {GET_POSTS, setAllPosts, setCommentsPostIsLoading} from "./postsReducer";
+import {GET_POSTS, setAllPosts, setCommentsPostIsLoading, setErrorPosts, setIsLoadingPosts} from "./postsReducer";
 import {GET_COMMENTS_POST, setCommentsPost, setErrorComments} from "./commentsReducer";
-import {GET_USER_INFO, setIsLoadingUser, setUserInfo, setUserPosts} from "./userReducer";
+import {GET_USER_INFO, setErrorUser, setIsLoadingUser, setUserInfo, setUserPosts} from "./userReducer";
 
 
 export function* getPostsSaga(): any {
   try {
+    yield put(setIsLoadingPosts(true))
     const payload = yield appAPI.getAllPosts().then(response => response.data)
     yield put(setAllPosts(payload))
-  } catch (error) {
-
-
+    yield delay(500)
+  } catch (error:any) {
+   yield put(setErrorPosts(error.message))
   } finally {
-
+    yield put(setIsLoadingPosts(false))
   }
 }
 
@@ -42,7 +43,7 @@ export function* getUserInfoSaga(action: { type: string, payload: { userId: numb
     yield put(setUserPosts(userPostsPayload))
     yield delay(500)
   } catch (error: any) {
-    yield put(setErrorComments(error.message))
+    yield put(setErrorUser(error.message))
   } finally {
     yield put(setIsLoadingUser(false))
   }

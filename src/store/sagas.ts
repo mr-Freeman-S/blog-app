@@ -1,7 +1,7 @@
 import {delay, put, takeEvery} from 'redux-saga/effects'
 import {appAPI} from "../api/api";
 import {GET_POSTS, setAllPosts, setCommentsPostIsLoading} from "./postsReducer";
-import {GET_COMMENTS_POST, setCommentsPost} from "./commentsReducer";
+import {GET_COMMENTS_POST, setCommentsPost, setErrorComments} from "./commentsReducer";
 
 
 export function* getPostsSaga(): any {
@@ -22,10 +22,11 @@ export function* getCommentsPostSaga(action: {type:string, payload: { postId: nu
   try {
     yield put(setCommentsPostIsLoading(postId))
     const payload = yield appAPI.getPostComments(postId).then(response => response.data)
-    yield delay(5000)
     yield put(setCommentsPost(payload))
+    yield delay(500)
   } catch (error) {
-
+    // @ts-ignore
+    yield put(setErrorComments(error.message))
   } finally {
     yield put(setCommentsPostIsLoading(0))
   }

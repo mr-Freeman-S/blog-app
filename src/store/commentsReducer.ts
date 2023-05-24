@@ -19,7 +19,9 @@ const slice = createSlice({
     setCommentsPost(state, action) {
       state.commentsPost.push(...action.payload)
     },
-
+    setErrorComments(state, action) {
+      state.error = action.payload
+    },
   },
 });
 
@@ -31,4 +33,4 @@ export const getComments = createAction(GET_COMMENTS_POST,(postId:number)=> ({
 
 export const commentsReducer = slice.reducer;
 
-export const {setCommentsPost} = slice.actions;
+export const {setCommentsPost,setErrorComments} = slice.actions;

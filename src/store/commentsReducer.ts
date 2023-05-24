@@ -22,15 +22,18 @@ const slice = createSlice({
     setErrorComments(state, action) {
       state.error = action.payload
     },
+    resetCommentsState() {
+      return initialState
+    },
   },
 });
 
 export const GET_COMMENTS_POST = 'comments/getComments';
-export const getComments = createAction(GET_COMMENTS_POST,(postId:number)=> ({
+export const getComments = createAction(GET_COMMENTS_POST, (postId: number) => ({
   payload: {postId},
 }));
 
 
 export const commentsReducer = slice.reducer;
 
-export const {setCommentsPost,setErrorComments} = slice.actions;
+export const {setCommentsPost, setErrorComments, resetCommentsState} = slice.actions;

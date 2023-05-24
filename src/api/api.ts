@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
-import {PostType} from "../types";
+import {PostType, UserInfoType} from "../types";
 
 const instance = axios.create({
   baseURL: 'https://jsonplaceholder.typicode.com',
@@ -10,8 +10,11 @@ const instance = axios.create({
 
 interface AppAPI {
   getAllPosts(): Promise<AxiosResponse<PostType[]>>;
+
   getPostComments(postId: number): Promise<AxiosResponse<PostType[]>>;
-  getUserInfo(userId: number): Promise<AxiosResponse<any>>;
+
+  getUserInfo(userId: number): Promise<AxiosResponse<UserInfoType>>;
+
   getUserPosts(userId: number): Promise<AxiosResponse<PostType[]>>;
 }
 

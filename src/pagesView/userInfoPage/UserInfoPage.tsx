@@ -1,25 +1,45 @@
-import React from 'react';
-import {Button, Card} from 'react-bootstrap';
-import {useNavigate} from "react-router-dom";
+import React, {useEffect} from 'react';
+import {Button, Card, Spinner} from 'react-bootstrap';
+import {useNavigate, useParams} from "react-router-dom";
 import {Posts} from '../postsPage/Posts';
+import {useAppDispatch, useAppSelector} from "../../store/hooks";
+import {getUserInfo} from "../../store/userReducer";
+import {resetCommentsState} from "../../store/commentsReducer";
 
 export const UserInfoPage = () => {
+  const {id: paramId} = useParams()
   const navigation = useNavigate();
+  const dispatch = useAppDispatch()
+  const userInfo = useAppSelector(state => state.user.userInfo)
+  const userPosts = useAppSelector(state => state.user.userPosts)
+  const isLoadingUser = useAppSelector(state => state.user.isLoadingUser)
+
+  useEffect(() => {
+    dispatch(getUserInfo(Number(paramId)))
+  }, [dispatch, paramId]);
+
+  const goBackHandler = () => {
+    dispatch(resetCommentsState())
+    navigation('/')
+  }
 
   return (
     <div>
-      <Button onClick={() => navigation(-1)} variant="primary" size="sm">
+      <Button onClick={goBackHandler} variant="primary" size="sm">
         Go Back
       </Button>
-      <Card>
+      {isLoadingUser ? <div><Spinner/>Loading Profile</div> : <Card>
         <Card.Header>
-          PASHA
+          {userInfo.name}
         </Card.Header>
         <Card.Body>
-          <Card.Text>About me</Card.Text>
+          <Card.Text>{`my email: ${userInfo.email}`}</Card.Text>
+          <Card.Text>{`my adress: ${userInfo.address.city}, ${userInfo.address.street}, ${userInfo.address.suite}`}</Card.Text>
+          <Card.Text>{`my phone: ${userInfo.phone}`}</Card.Text>
         </Card.Body>
-      </Card>
-      <Posts posts={[]}/>
+        <Posts posts={userPosts}/>
+      </Card>}
+
     </div>
   );
 };
